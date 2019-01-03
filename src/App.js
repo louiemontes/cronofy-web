@@ -47,7 +47,7 @@ class App extends Component {
           </p>
           {accessBlock && (
             <button onClick={() => console.log("make something soon!")}>
-              Create event
+              Create event!
             </button>
           )}
         </header>
