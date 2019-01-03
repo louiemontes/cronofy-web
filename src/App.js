@@ -4,50 +4,37 @@ import "./App.css";
 
 class App extends Component {
   state = {
-    accessToken: "",
-    data: ""
+    accessBlock: undefined
   };
 
-  //https://cronofy-api.herokuapp.com/cronofy-auth
-  //localhost:8080
-
   componentDidMount() {
-    
-    (async () => {
-      const rawResponse = await fetch(`${process.env.REACT_APP_API_URL}/passwords`, {
-        method: "GET",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        }
-        //credentials: "include",
-        //  mode: "no-cors"
-      });
-      const content = await rawResponse.json();
-      console.log(content);
-    })();
-
-    
-    
-
-    try {
-      fetch(`${process.env.REACT_APP_API_URL}/show-user`, {
+    fetch(
+      `${process.env.REACT_APP_API_URL}/show-user/${
+        process.env.REACT_APP_USER_ID
+      }`,
+      {
         method: "GET",
         headers: {
           Accept: "application/json, text/plain, */*",
           "Content-Type": "application/json"
         }
-      })
-        .then(res => res.json())
-        .then(json => this.setState({ data: json }))
-        .catch(err => console.error(err));
-    } catch (error) {
-      console.error(error);
-    }
+      }
+    )
+      .then(rawAccess => rawAccess.json())
+      .then(accessClean => accessClean[0])
+      .then(singleAccess => this.setState({ accessBlock: singleAccess }))
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render() {
-    const authLink = `${process.env.REACT_APP_API_URL}/cronofy-auth`;
+    const authLink = `${process.env.REACT_APP_API_URL}/cronofy-auth/${
+      process.env.REACT_APP_USER_ID
+    }`;
+
+    const { accessBlock } = this.state;
+    accessBlock && console.log(this.state.accessBlock);
     return (
       <div className="App">
         <header className="App-header">
@@ -58,6 +45,11 @@ class App extends Component {
               Click to get access token.
             </a>
           </p>
+          {accessBlock && (
+            <button onClick={() => console.log("make something soon!")}>
+              Create event
+            </button>
+          )}
         </header>
       </div>
     );
