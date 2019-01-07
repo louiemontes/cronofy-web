@@ -79,7 +79,8 @@ class App extends Component {
               </a>
             )}
           </p>
-          {accessBlock && notThing && (
+          {/* 
+            accessBlock && notThing && (
             <React.Fragment>
               <button
                 onClick={(start, end) =>
@@ -106,7 +107,8 @@ class App extends Component {
                 Standard Time)!
               </button>
             </React.Fragment>
-          )}
+          )
+          */}
         </header>
       </div>
     );
