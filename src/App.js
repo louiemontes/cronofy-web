@@ -79,7 +79,7 @@ class App extends Component {
               </a>
             )}
           </p>
-          {accessBlock && (
+          {accessBlock && notThing && (
             <React.Fragment>
               <button
                 onClick={(start, end) =>
