@@ -22,7 +22,7 @@ class App extends Component {
     )
       .then(rawAccess => rawAccess.json())
       .then(accessClean => accessClean[0])
-      .then(singleAccess => this.setState({ accessBlock: singleAccess }))
+      .then(singleAccess => this.setState({ accessBlock: "singleAccess" }))
       .catch(error => {
         console.log(error);
       });
