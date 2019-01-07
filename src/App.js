@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import logo from "./logo.svg";
 import "./App.css";
-import RangePicker from "react-range-picker";
-import TimePicker from "rc-time-picker";
 
 class App extends Component {
   state = {
@@ -31,12 +29,6 @@ class App extends Component {
   }
 
   handleCreateEvent(start, end) {
-    console.log(
-      this.state.accessBlock.access_token,
-      this.state.accessBlock.refresh_token
-    );
-
-    console.log(start, end);
     fetch(
       `${process.env.REACT_APP_API_URL}/createEvent/${
         process.env.REACT_APP_USER_ID
@@ -48,18 +40,12 @@ class App extends Component {
           access_token: this.state.accessBlock.access_token,
           start: start,
           end: end
-        }) // body data type must match "Content-Type" header
+        })
       }
     );
   }
 
   handleDeleteEvent(start, end) {
-    console.log(
-      this.state.accessBlock.access_token,
-      this.state.accessBlock.refresh_token
-    );
-
-    console.log(start, end);
     fetch(
       `${process.env.REACT_APP_API_URL}/deleteEvent/${
         process.env.REACT_APP_USER_ID
@@ -69,7 +55,7 @@ class App extends Component {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           access_token: this.state.accessBlock.access_token
-        }) // body data type must match "Content-Type" header
+        })
       }
     );
   }
@@ -103,17 +89,21 @@ class App extends Component {
                   )
                 }
               >
-                Create event for 01092019:00:00:00 to 01112019:00:00:00!
+                Create event for Sat Jan 12 2019 00:00:00 GMT-0700 (Mountain
+                Standard Time) to Sat Jan 12 2019 00:30:00 GMT-0700 (Mountain
+                Standard Time)!
               </button>
               <button
                 onClick={(start, end) =>
                   this.handleDeleteEvent(
-                    "Wed Jan 09 2019 00:00:00 GMT-0700 (Mountain Standard Time)",
-                    "Fri Jan 11 2019 00:00:00 GMT-0700 (Mountain Standard Time)"
+                    "Sat Jan 12 2019 00:00:00 GMT-0700 (Mountain Standard Time)",
+                    "Sat Jan 12 2019 00:30:00 GMT-0700 (Mountain Standard Time)"
                   )
                 }
               >
-                Delete event for 01092019:00:00:00 to 01112019:00:00:00!
+                Delete event for Sat Jan 12 2019 00:00:00 GMT-0700 (Mountain
+                Standard Time) to Sat Jan 12 2019 00:30:00 GMT-0700 (Mountain
+                Standard Time)!
               </button>
             </React.Fragment>
           )}
